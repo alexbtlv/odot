@@ -6,10 +6,15 @@ describe User do
       first_name: "Jason",
       last_name: "Seifer",
       email: "jason@teamtreehouse.com",
-      password: "1234567890",
-      password_confirmation: "1234567890"
+      password: "treehouse1234",
+      password_confirmation: "treehouse1234"
     }
   }
+
+  context "relationships" do
+    it { should have_many(:todo_lists) }
+  end
+
   context "validations" do
     let(:user) { User.new(valid_attributes) }
 
@@ -29,6 +34,11 @@ describe User do
       user.email = "JASON@TEAMTREEHOUSE.COM"
       expect(user).to validate_uniqueness_of(:email)
     end
+
+    it "requires the email address to look like an email" do
+      user.email = "jason"
+      expect(user).to_not be_valid
+    end
     
   end
 
@@ -45,6 +55,19 @@ describe User do
       user.email = "MIKE@TEAMTREEHOUSE.COM"
       expect(user.save).to be_true
       expect(user.email).to eq("mike@teamtreehouse.com")
+    end
+  end
+
+  describe "#generate_password_reset_token!" do
+    let(:user) { create(:user) }
+    
+    it "changes the password_reset_token attribute" do
+      expect{ user.generate_password_reset_token! }.to change{user.password_reset_token}
+    end
+
+    it "calls SecureRandom.urlsafe_base64 to generate the password_reset_token" do
+      expect(SecureRandom).to receive(:urlsafe_base64)
+      user.generate_password_reset_token!
     end
   end
 end
