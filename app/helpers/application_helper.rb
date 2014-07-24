@@ -14,6 +14,6 @@ module ApplicationHelper
 			text = "Todo List"
 			path = new_todo_list_path
 		end
-		link_to "Add #{text}", path, clas: "icon-new right hide-text"
+		link_to "Add #{text}", path, class: "icon-new right hide-text"
 	end
 end
