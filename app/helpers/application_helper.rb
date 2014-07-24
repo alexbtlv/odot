@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+	def title(title)
+		content_for(:title) {"#{title} | "}
+	end
+
 	def new_item_link
 		# <a href="#" class="icon-new right hide-text">Add Item</a>
 		if @todo_list && !@todo_list.new_record?
