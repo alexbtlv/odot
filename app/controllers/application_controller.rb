@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def go_back(path)
+    @go_back ||= path
+    @go_back
+  end
+
   def render_404
     render file: 'public/404.html', status: :not_found, layout: false
   end
