@@ -9,7 +9,7 @@ describe "Logging In" do
     fill_in "Password", with: "treehouse1"
     click_button "Log In"
     
-    expect(page).to have_content("Todo Lists")
+    expect(page).to have_content("Todo lists")
     expect(page).to have_content("Thanks for logging in!")
   end
 
