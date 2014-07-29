@@ -1,6 +1,27 @@
 <% title @todo_list.title %>
 <h2 class="page-title truncate" title="<%= @todo_list.title %>"><%= @todo_list.title %></h2>
 
+<div class="row" id="todo-list-functions">
+  <div class="small-4 column">
+    <%= link_to edit_todo_list_path(@todo_list), class: "button expand radius outline" do %>
+    <span class="fa fa-edit"></span>
+    Edit
+    <% end %>
+  </div>
+  <div class="small-4 column">
+    <%= link_to edit_todo_list_path(@todo_list), class: "button expand radius outline", data: {"reveal-id" => "email-modal"} do %>
+    <span class="fa fa-envelope-o"></span>
+    Email
+    <% end %>
+  </div>
+  <div class="small-4 column">
+    <%= link_to todo_list_path(@todo_list), class: "button expand radius outline alert", method: :delete, data: {confirm: "Sure?"} do %>
+    <span class="fa fa-trash-o"></span>
+    Delete
+    <% end %>
+  </div>
+</div>
+
 <ul class="list todo-items no-bullet">
   <% @todo_list.todo_items.each do |todo_item| %>
     <li id="<%= dom_id(todo_item) %>" class="todo-item row">
