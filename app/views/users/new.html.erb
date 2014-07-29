@@ -1,70 +1,10 @@
 <%= title "Register for ODOT" %>
 
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.label :first_name, "First Name" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.text_field :first_name %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.label :last_name, "Last Name" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
+<%= form_for(@user, builder: FoundationFormBuilder) do |f| %>
+      <%= f.text_field :first_name, autofocus: 'autofocus' %>
       <%= f.text_field :last_name %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
-    	<%= f.label :email %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.text_field :email %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.label :password %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
+      <%= f.email_field :email %>
       <%= f.password_field :password %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.label :password_confirmation, "Password (again)" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="small-12 column">
       <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
-	<div class="row">
-   	<div class="small-12 column">
-   		<%= f.submit "Sign Up", class: "button radius expand" %>
-   	</div>
-	</div>
+      <%= f.submit "Sign Up" %>
 <% end %>
