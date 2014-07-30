@@ -70,4 +70,42 @@ describe User do
       user.generate_password_reset_token!
     end
   end
+
+  describe "#create default lists" do
+    let(:user) { create(:user) }
+
+    it "creates a todo list" do
+      expect{ user.create_default_lists }.to change{ user.todo_lists.size }.by(1)
+    end 
+
+    it "does not create the same todo list twice" do
+      expect{ user.create_default_lists }.to change{ user.todo_lists.size }.by(1)
+      expect{ user.create_default_lists }.to change{ user.todo_lists.size }.by(0)
+    end
+
+    it "creates todo items" do
+      expect { user.create_default_lists }.to change{ TodoItem.count }.by(7)
+    end
+
+    it "creates only uniqe todo items" do
+      expect { user.create_default_lists }.to change{ TodoItem.count }.by(7)
+      expect { user.create_default_lists }.to change{ TodoItem.count }.by(0)
+    end
+  end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
