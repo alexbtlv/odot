@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   add_flash_types :success, :failure
   rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :render_error
-
+  
   private
 
   def go_back(path)
